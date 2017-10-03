@@ -1,4 +1,4 @@
-import Rx from 'rxjs';
+import {Observable} from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { combineEpics } from 'redux-observable';
 
@@ -23,7 +23,7 @@ const createRxFormEpic = (listenner, rxObserver) =>
 
 
 export const rxFormActionCreator = (action, listenner) => {
-  const rxObservable = new Rx.Observable(rxObserver => {
+  const rxObservable = new Observable(rxObserver => {
     reduxFormObservable$.next(createRxFormEpic(listenner, rxObserver))
   })
   let rxSubscriber
