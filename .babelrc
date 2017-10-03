@@ -2,9 +2,9 @@
   "presets": [
     [ "env", {
       "targets": {
-         "browsers": ["last 2 versions", "> 5%"]
+         "browsers": ["last 2 versions", "> 5%"],
+         "node": "6.10"
       },
-      "modules": false,
       "useBuiltIns": true,
       "debug": true,
     }],

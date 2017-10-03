@@ -1,4 +1,4 @@
-import {Observable} from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { combineEpics } from 'redux-observable';
 
@@ -31,13 +31,14 @@ export const rxFormActionCreator = (action, listenner) => {
     return new Promise((resolve, reject) => {
       dispatch(action(({...payload})))
       rxSubscriber = rxObservable.subscribe((m) => {
-        console.log("couou");
         if (m === SUCCESS) {
           resolve()
         } else {
           reject()
         }
       })
-    }).then(_ => rxSubscriber.unsubscribe())
+    })
+    .then(_ => rxSubscriber.unsubscribe())
+    .catch(_ => rxSubscriber.unsubscribe())
   }
 }
