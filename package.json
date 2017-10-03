@@ -2,9 +2,11 @@
   "name": "redux-observable-promise",
   "version": "0.1.0",
   "description": "redux-observable-promise is a plugin for redux-observable. It allows to return a promise after an action as been dispatch, and resolve/reject the promise depending of others action. It can be use for redux-form",
-  "main": "index.js",
+  "main": "bin/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rm -fr bin && mkdir bin && babel src/index.js --out-file bin/index.js",
+    "prepublish": "npm run build"
   },
   "keywords": [
     "redux",
@@ -16,6 +18,25 @@
     "react",
     "react-redux"
   ],
+  "peerDependencies": {
+    "redux-observable": ">= 0.16.0 < 1",
+    "rxjs": ">= 5.0.0 < 6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:AyWa/redux-promise-observable.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AyWa/redux-promise-observable/issues"
+  },
   "author": "Marc Hurabielle <marc.hurabielle@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "redux-observable": "^0.16.0",
+    "rxjs": "^5.3.0"
+  }
 }
