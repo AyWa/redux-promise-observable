@@ -1,1 +1,56 @@
-# Redux-Promise-Observable
+# Redux-Promise-Observable   
+## Install
+`npm i redux-observable-promise`   
+or `yarn add redux-observable-promise`   
+## Goal
+The goal of redux-promise-observable is to return a promise while dispatching an action. Then resolve/reject this promise when a choosen action has been dispatch.   
+It can be use for example for redux-form submit function etc.
+## Dependencies 
+- redux-observable
+- rxjs
+## Doc
+### Setup 
+you just need to add `rxFromObservableEpic` to your rootEpics 
+```
+import { createEpicMiddleware, combineEpics } from 'redux-observable';
+import {rxFromObservableEpic} from 'redux-observable-promise'
+export default createEpicMiddleware(
+  combineEpics(
+    // your other epics
+    rxFromObservableEpic,
+  )
+)
+```
+### Helper function
+redux-promise-observable is composed of 1 helper function:
+- rxFormActionCreator
+#### rxFormActionCreator(actionCreator, listenner)  
+##### Return value
+`rxFormActionCreator(actionCreator, listenner)`   
+return a promise
+##### Parameters
+- actionCreator is a normal action creator like:
+```
+actionCreator = (payload) => ({
+  type: 'ACTION',
+  payload,
+})
+```
+or `createAction(ACTION)` if you are using `createAction` package
+
+- listenner is an array which has to contain an ACTION TYPE when the promise has to be resolve, and the ACTION TYPE when the promise has to be reject. like:
+```
+[ACTION_TYPE_SUCCEED, ACTION_TYPE_FAILURE]
+```
+##### Full example:
+```
+import {rxFormActionCreator} from 'redux-observable-promise'
+loginActionRequest = (payload) => ({
+  type: 'LOGIN_REQUEST',
+  payload,
+)}
+export const loginRequest = rxFormActionCreator(
+  loginActionRequest,
+  ['LOGIN_SUCCESS', 'LOGIN_FAILURE'],
+)
+```
