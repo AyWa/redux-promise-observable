@@ -54,3 +54,5 @@ export const loginRequest = promiseActionCreator(
   ['LOGIN_SUCCESS', 'LOGIN_FAILURE'],
 )
 ```
+## Inspiration:
+- `redux-form-saga` : https://github.com/mhssmnn/redux-form-saga (I used it when I was using redux-sagas)
