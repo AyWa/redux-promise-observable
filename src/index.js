@@ -7,12 +7,12 @@ const FAILURE = 'FAILURE'
 
 const reduxFormObservable$ = new BehaviorSubject(combineEpics())
 
-export const rxFromObservableEpic = (actions$, store) =>
+export const reduxPromiseObservableEpic = (actions$, store) =>
   reduxFormObservable$.mergeMap(epic =>
     epic(actions$, store),
   )
 
-const createRxFormEpic = (listenner, rxObserver) =>
+const createListennerEpic = (listenner, rxObserver) =>
   action$ =>
     action$.ofType(listenner[0])
       .do(_ => rxObserver.next(SUCCESS))
@@ -22,9 +22,9 @@ const createRxFormEpic = (listenner, rxObserver) =>
       ).ignoreElements()
 
 
-export const rxFormActionCreator = (action, listenner) => {
+export const promiseActionCreator = (action, listenner) => {
   const rxObservable = new Observable(rxObserver => {
-    reduxFormObservable$.next(createRxFormEpic(listenner, rxObserver))
+    reduxFormObservable$.next(createListennerEpic(listenner, rxObserver))
   })
   let rxSubscriber
   return (payload, dispatch) => {
