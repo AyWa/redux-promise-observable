@@ -27,7 +27,9 @@ redux-promise-observable is composed of 1 helper function:
 ### promiseActionCreator(actionCreator, listenner)  
 #### Return value
 `promiseActionCreator(actionCreator, listenner)`   
-return a promise
+return a promise. You can do what ever you want with it.
+ - `.catch(p => //your logic)` p will be the payload of the error listenner (see below)
+ - `.then(p => //your logic)` p will be the payload of the success listenner (see below)
 #### Parameters
 - actionCreator is a normal action creator like:
 ```
