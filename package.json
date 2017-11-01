@@ -1,6 +1,6 @@
 {
   "name": "redux-observable-promise",
-  "version": "0.1.7",
+  "version": "0.2.0",
   "description": "redux-observable-promise is a plugin for redux-observable. It allows to return a promise after an action as been dispatch, and resolve/reject the promise depending of others action. It can be use for redux-form",
   "main": "bin/index.js",
   "scripts": {

@@ -15,10 +15,10 @@ export const reduxPromiseObservableEpic = (actions$, store) =>
 const createListennerEpic = (listenner, rxObserver) =>
   action$ =>
     action$.ofType(listenner[0])
-      .do(_ => rxObserver.next(SUCCESS))
+      .do(({payload}) => rxObserver.next({type: SUCCESS, payload}))
       .race(
         action$.ofType(listenner[1])
-          .do(_ => rxObserver.next(FAILURE)),
+          .do(({payload}) => rxObserver.next({type: FAILURE, payload})),
       ).ignoreElements()
 
 
@@ -27,18 +27,16 @@ export const promiseActionCreator = (action, listenner) => {
     reduxFormObservable$.next(createListennerEpic(listenner, rxObserver))
   })
   let rxSubscriber
-  return (payload, dispatch) => {
-    return new Promise((resolve, reject) => {
+  return (payload, dispatch) =>
+    new Promise((resolve, reject) => {
       dispatch(action(({...payload})))
-      rxSubscriber = rxObservable.subscribe((m) => {
-        if (m === SUCCESS) {
-          resolve()
+      rxSubscriber = rxObservable.subscribe(({type, payload}) => {
+        if (type === SUCCESS) {
+          resolve(payload)
         } else {
-          reject()
+          reject(payload)
         }
+        rxSubscriber.unsubscribe();
       })
     })
-    .then(_ => rxSubscriber.unsubscribe())
-    .catch(_ => rxSubscriber.unsubscribe())
-  }
 }
