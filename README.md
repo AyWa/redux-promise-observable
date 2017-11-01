@@ -21,14 +21,14 @@ export default createEpicMiddleware(
   )
 )
 ```
-### Helper function
+## Helper function
 redux-promise-observable is composed of 1 helper function:
 - promiseActionCreator
-#### promiseActionCreator(actionCreator, listenner)  
-##### Return value
+### promiseActionCreator(actionCreator, listenner)  
+#### Return value
 `promiseActionCreator(actionCreator, listenner)`   
 return a promise
-##### Parameters
+#### Parameters
 - actionCreator is a normal action creator like:
 ```
 actionCreator = (payload) => ({
@@ -42,7 +42,7 @@ or `createAction(ACTION)` if you are using `createAction` package
 ```
 [ACTION_TYPE_SUCCEED, ACTION_TYPE_FAILURE]
 ```
-##### Full example:
+#### Full example:
 ```
 import {promiseActionCreator} from 'redux-observable-promise'
 loginActionRequest = (payload) => ({
@@ -54,3 +54,5 @@ export const loginRequest = promiseActionCreator(
   ['LOGIN_SUCCESS', 'LOGIN_FAILURE'],
 )
 ```
+## Inspiration:
+- `redux-form-saga` : https://github.com/mhssmnn/redux-form-saga (I used it when I was using redux-sagas)
